@@ -1,18 +1,21 @@
 (function() {
-  var ListView;
-  ListView = Backbone.View.extend({
+  var MainView;
+  MainView = Backbone.View.extend({
     el: $('body'),
     events: {
       'click button#add': 'createStopwatch'
     },
     initialize: function() {
-      _.bindAll(this, 'render', 'createStopwatch');
       this.counter = 0;
+      this.collection = new window.StopwatchCollection;
+      this.collectionView = new window.StopwatchCollectionView({
+        el: $("#stopwatches"),
+        collection: this.collection
+      });
       return this.render();
     },
     render: function() {
-      $(this.el).append("<button id='add'>Add Stopwatch</button>");
-      return $(this.el).append("<ul></ul>");
+      return $(this.el).append("<button id='add'>Add Stopwatch</button>");
     },
     createStopwatch: function() {
       var stopwatch, view;
@@ -23,12 +26,11 @@
       view = new window.StopwatchView({
         model: stopwatch
       });
-      console.log(view.render().el);
-      return this.$("#stopwatches").append(view.render().el);
+      this.collection.add(stopwatch);
+      return console.log(this.collection);
     }
   });
   jQuery(function() {
-    var listView;
-    return listView = new ListView();
+    return window.mainView = new MainView();
   });
 }).call(this);

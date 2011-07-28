@@ -1,25 +1,25 @@
-ListView = Backbone.View.extend(
+MainView = Backbone.View.extend(
   el: $('body')
 
   events:
     'click button#add': 'createStopwatch'
   
   initialize: ->
-    _.bindAll(this, 'render', 'createStopwatch')
     @counter = 0
+    @collection = new window.StopwatchCollection
+    @collectionView = new window.StopwatchCollectionView({el:$("#stopwatches"),collection:@collection})
     @render()
   
   render: ->
     $(@el).append("<button id='add'>Add Stopwatch</button>")
-    $(@el).append("<ul></ul>")
     
   createStopwatch: ->
     @counter++
     stopwatch = new window.Stopwatch({name:@counter})
     view = new window.StopwatchView({model:stopwatch})
-    console.log(view.render().el)
-    this.$("#stopwatches").append(view.render().el)    
+    @collection.add(stopwatch)
+    console.log(@collection)
 )
 
 jQuery ->
-  listView = new ListView();      
+  window.mainView = new MainView();      

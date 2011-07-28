@@ -5,22 +5,35 @@ class window.Stopwatch extends Backbone.Model
   
   initialize: ->
     @set("time":@defaults.time) unless @get("time")?
+    @set("elapsed":0, "remaining": @get("time"))
     @set("running":false) unless @get("running")?
     
   time: ->
     new Date().getTime() - @startTime
     
+  timeLeft: ->
+    @get("time") - @get("elapsed")
+    
+  tick: =>
+    @set("elapsed":(@time()/1000).toFixed(1))
+    @set("remaining": @timeLeft())
+    $(".time",@view.el).val(@get("remaining").toFixed(1))
+    if @get("remaining") <= 0
+      @stop()
+      @collection.startNext()
+    
   start: ->
     @running = true
     @startTime = new Date().getTime()
-    updater = () => 
-      @set("time":(@time()/1000).toFixed(2))
-    @timer = setInterval updater , 10
+    @timer = setInterval @tick , 100
     
   stop: ->
     @running = false
+    window.clearInterval @timer
+    
+  reset: ->
     @startTime = null
-    clearInterval @timer
+    @set({"elapsed":0,"remaining":0})
     
   startStop: ->
     if @running

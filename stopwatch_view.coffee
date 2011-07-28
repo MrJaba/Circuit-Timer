@@ -4,16 +4,22 @@ class window.StopwatchView extends Backbone.View
   className: "stopwatch"
     
   events:
-    "click .start-stop" : "startStop"
+    "click button.start-stop" : "startStop"
+    "change input.time": "setTime"
   
   initialize: ->
+    @model.view = @
     @template = _.template($(@template).html())
-    @model.bind("change:time", @render)
   
   render: =>
     $(@el).html(@template(@model.toJSON()))
     @
 
-  startStop: ->
+  startStop: =>
     @model.startStop()
+    
+  #Note the @.$ this scopes the jquery selector to the current element
+  setTime: =>
+    @model.set("time": @.$("input.time").val())
+    
     

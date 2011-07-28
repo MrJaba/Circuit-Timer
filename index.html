@@ -10,15 +10,18 @@
   <script src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.6/underscore-min.js"></script>
 
   <script src="backbone-min.js"></script>
-
+  
   <script src="stopwatch.js"></script>
-  <script src="stopwatch_list.js"></script>
+  <script src="application_view.js"></script>
   <script src="stopwatch_view.js"></script>
+  <script src="stopwatch_collection_view.js"></script>
+  <script src="stopwatch_collection.js"></script>
+  
   
   <script type="text/template" id="stopwatch-template">
     <section class="touch">
-      <input type="text" placeholder="Name..." value="<%= name %>"/>
-      <div class="time"><%= time %></div>
+      <input type="text" placeholder="Name..." />
+      <input type="text" placeholder="Time...<%= remaining %>s" class="time"/>
       <button class="start-stop">Start/Stop</button>
     </section>
   </script>

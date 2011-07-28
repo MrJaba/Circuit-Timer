@@ -9,6 +9,8 @@
   };
   window.StopwatchView = (function() {
     function StopwatchView() {
+      this.setTime = __bind(this.setTime, this);;
+      this.startStop = __bind(this.startStop, this);;
       this.render = __bind(this.render, this);;      StopwatchView.__super__.constructor.apply(this, arguments);
     }
     __extends(StopwatchView, Backbone.View);
@@ -16,11 +18,12 @@
     StopwatchView.prototype.tagName = "section";
     StopwatchView.prototype.className = "stopwatch";
     StopwatchView.prototype.events = {
-      "click .start-stop": "startStop"
+      "click button.start-stop": "startStop",
+      "change input.time": "setTime"
     };
     StopwatchView.prototype.initialize = function() {
-      this.template = _.template($(this.template).html());
-      return this.model.bind("change:time", this.render);
+      this.model.view = this;
+      return this.template = _.template($(this.template).html());
     };
     StopwatchView.prototype.render = function() {
       $(this.el).html(this.template(this.model.toJSON()));
@@ -28,6 +31,11 @@
     };
     StopwatchView.prototype.startStop = function() {
       return this.model.startStop();
+    };
+    StopwatchView.prototype.setTime = function() {
+      return this.model.set({
+        "time": this.$("input.time").val()
+      });
     };
     return StopwatchView;
   })();
