@@ -21,5 +21,3 @@ class window.StopwatchView extends Backbone.View
   #Note the @.$ this scopes the jquery selector to the current element
   setTime: =>
     @model.set("time": @.$("input.time").val())
-    
-    
