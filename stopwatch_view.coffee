@@ -8,7 +8,7 @@ class window.StopwatchView extends Backbone.View
     "change input.time": "setTime"
   
   initialize: ->
-    @model.view = @
+    @model.view = @ if @model
     @template = _.template($(@template).html())
   
   render: =>

@@ -27,9 +27,12 @@
         "remaining": this.get("time")
       });
       if (this.get("running") == null) {
-        return this.set({
+        this.set({
           "running": false
         });
+      }
+      if (this.attributes.view != null) {
+        return this.view = this.attributes.view;
       }
     };
     Stopwatch.prototype.time = function() {
@@ -46,6 +49,7 @@
         "remaining": this.timeLeft()
       });
       $(".time", this.view.el).val(this.get("remaining").toFixed(1));
+      console.log(this.get("remaining").toFixed(1));
       if (this.get("remaining") <= 0) {
         this.stop();
         return this.collection.startNext();
@@ -73,6 +77,10 @@
       } else {
         return this.start();
       }
+    };
+    Stopwatch.prototype.isDelay = function() {
+      console.log(this.get("name"));
+      return this.get("name").toString().match(/delay/);
     };
     return Stopwatch;
   })();

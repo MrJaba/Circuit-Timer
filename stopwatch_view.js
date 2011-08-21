@@ -22,7 +22,9 @@
       "change input.time": "setTime"
     };
     StopwatchView.prototype.initialize = function() {
-      this.model.view = this;
+      if (this.model) {
+        this.model.view = this;
+      }
       return this.template = _.template($(this.template).html());
     };
     StopwatchView.prototype.render = function() {

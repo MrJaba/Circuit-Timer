@@ -7,27 +7,33 @@
 <body>
   <link href="./stylesheets/reset.css" media="screen" rel="stylesheet" type="text/css">
   <link href="./stylesheets/application.css" media="screen" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-  <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
-  <script src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.6/underscore-min.js"></script>
+  
+  <script src="jquery-1.5.1.min.js"></script>
+  <script src="underscore.js"></script>
 
-  <script src="backbone-min.js"></script>
+  <script src="backbone.js"></script>
   
   <script src="stopwatch.js"></script>
   <script src="application_view.js"></script>
   <script src="stopwatch_view.js"></script>
   <script src="stopwatch_collection_view.js"></script>
+  <script src="delay_view.js"></script>
   <script src="stopwatch_collection.js"></script>
+  
   
   
   <script type="text/template" id="stopwatch-template">
     <section class="touch">
-      <input type="text" placeholder="Name..." />
-      <input type="text" placeholder="Time...<%= remaining %>s" class="time"/>
+      <input type="text" placeholder="Exercise <%= name %>" />
+      <input type="text" placeholder="<%= remaining %>s" class="time"/>
       <button class="start-stop">Start/Stop</button>
     </section>
   </script>
   
+  <script type="text/template" id="delay-template">
+    <input type='text' class='delay time' placeholder='Delay'/>
+  </script>  
+
   <div id="stopwatches"></div>
   
 </body>

@@ -8,6 +8,8 @@ MainView = Backbone.View.extend(
     @counter = 0
     @collection = new window.StopwatchCollection
     @collectionView = new window.StopwatchCollectionView({el:$("#stopwatches"),collection:@collection})
+    @delayView = new window.DelayView({collection:@collection})
+    @delayView.render()
     @render()
   
   render: ->
@@ -18,6 +20,7 @@ MainView = Backbone.View.extend(
     stopwatch = new window.Stopwatch({name:@counter})
     view = new window.StopwatchView({model:stopwatch})
     @collection.add(stopwatch)
+    @collection.add(new window.Stopwatch({name:'delay'+@counter, view:@delayView}))
     console.log(@collection)
 )
 

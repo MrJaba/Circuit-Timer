@@ -20,8 +20,12 @@ input{
   color:black;
   font: 40px/20px "Chunk",Helvetica,Sans-Serif;
   text-align: center;
-
   z-index: 10;
+}
+
+input#delay{
+  height:20px;
+  font: 20px/20px "Chunk",Helvetica,Sans-Serif;
 }
 
 button.start-stop{

@@ -5,7 +5,8 @@ class window.StopwatchCollection extends Backbone.Collection
   initialize: ->
     @current = 0
     
-  startCircuit: ->
+  startCircuit: (delayTime) ->
+    @delayTime = delayTime
     @startNext()
     
   startNext: ->
@@ -13,3 +14,9 @@ class window.StopwatchCollection extends Backbone.Collection
     
   next: ->
     @at(@current++)
+    
+  setDelay: (delay) ->
+    @each (stopwatch) ->
+      console.log(stopwatch, stopwatch.isDelay())
+      stopwatch.set({"time": delay}) if stopwatch.isDelay()
+        

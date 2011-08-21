@@ -4,7 +4,9 @@ class window.StopwatchCollectionView extends Backbone.View
     'click button#startCircuit': 'startCircuit'
   
   initialize: ->
-    @collection.bind("add", (stopwatch) => $(@el).append(stopwatch.view.render().el))
+    @collection.bind("add", (stopwatch) => 
+      console.log(stopwatch)
+      $(@el).append(stopwatch.view.render().el))
     @render()
   
   render: =>
@@ -12,4 +14,4 @@ class window.StopwatchCollectionView extends Backbone.View
     @
     
   startCircuit: ->
-    @collection.startCircuit()
+    @collection.startCircuit($("#delay").val())

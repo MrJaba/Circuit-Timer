@@ -16,7 +16,8 @@
     StopwatchCollection.prototype.initialize = function() {
       return this.current = 0;
     };
-    StopwatchCollection.prototype.startCircuit = function() {
+    StopwatchCollection.prototype.startCircuit = function(delayTime) {
+      this.delayTime = delayTime;
       return this.startNext();
     };
     StopwatchCollection.prototype.startNext = function() {
@@ -26,6 +27,16 @@
     };
     StopwatchCollection.prototype.next = function() {
       return this.at(this.current++);
+    };
+    StopwatchCollection.prototype.setDelay = function(delay) {
+      return this.each(function(stopwatch) {
+        console.log(stopwatch, stopwatch.isDelay());
+        if (stopwatch.isDelay()) {
+          return stopwatch.set({
+            "time": delay
+          });
+        }
+      });
     };
     return StopwatchCollection;
   })();

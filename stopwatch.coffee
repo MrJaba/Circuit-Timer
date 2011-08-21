@@ -7,6 +7,7 @@ class window.Stopwatch extends Backbone.Model
     @set("time":@defaults.time) unless @get("time")?
     @set("elapsed":0, "remaining": @get("time"))
     @set("running":false) unless @get("running")?
+    @view = @attributes.view if @attributes.view?
     
   time: ->
     new Date().getTime() - @startTime
@@ -17,7 +18,8 @@ class window.Stopwatch extends Backbone.Model
   tick: =>
     @set("elapsed":(@time()/1000).toFixed(1))
     @set("remaining": @timeLeft())
-    $(".time",@view.el).val(@get("remaining").toFixed(1))
+    $(".time", @view.el).val(@get("remaining").toFixed(1))
+    console.log(@get("remaining").toFixed(1))
     if @get("remaining") <= 0
       @stop()
       @collection.startNext()
@@ -40,3 +42,7 @@ class window.Stopwatch extends Backbone.Model
       @stop()
     else
       @start()
+      
+  isDelay: ->
+    console.log(@get("name"))
+    @get("name").toString().match(/delay/)

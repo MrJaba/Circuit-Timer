@@ -17,6 +17,7 @@
     };
     StopwatchCollectionView.prototype.initialize = function() {
       this.collection.bind("add", __bind(function(stopwatch) {
+        console.log(stopwatch);
         return $(this.el).append(stopwatch.view.render().el);
       }, this));
       return this.render();
@@ -26,7 +27,7 @@
       return this;
     };
     StopwatchCollectionView.prototype.startCircuit = function() {
-      return this.collection.startCircuit();
+      return this.collection.startCircuit($("#delay").val());
     };
     return StopwatchCollectionView;
   })();

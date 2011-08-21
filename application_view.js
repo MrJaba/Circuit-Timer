@@ -12,6 +12,10 @@
         el: $("#stopwatches"),
         collection: this.collection
       });
+      this.delayView = new window.DelayView({
+        collection: this.collection
+      });
+      this.delayView.render();
       return this.render();
     },
     render: function() {
@@ -27,6 +31,10 @@
         model: stopwatch
       });
       this.collection.add(stopwatch);
+      this.collection.add(new window.Stopwatch({
+        name: 'delay' + this.counter,
+        view: this.delayView
+      }));
       return console.log(this.collection);
     }
   });
