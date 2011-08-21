@@ -20,9 +20,15 @@
       this.delayTime = delayTime;
       return this.startNext();
     };
+    StopwatchCollection.prototype.resetAll = function() {
+      this.current = 0;
+      return this.trigger("resetAll");
+    };
     StopwatchCollection.prototype.startNext = function() {
       if (this.current < this.size()) {
         return this.next().start();
+      } else {
+        return this.resetAll();
       }
     };
     StopwatchCollection.prototype.next = function() {
@@ -30,7 +36,6 @@
     };
     StopwatchCollection.prototype.setDelay = function(delay) {
       return this.each(function(stopwatch) {
-        console.log(stopwatch, stopwatch.isDelay());
         if (stopwatch.isDelay()) {
           return stopwatch.set({
             "time": delay

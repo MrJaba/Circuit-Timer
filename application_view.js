@@ -25,17 +25,18 @@
       var stopwatch, view;
       this.counter++;
       stopwatch = new window.Stopwatch({
-        name: this.counter
+        name: this.counter,
+        collection: this.collection
       });
       view = new window.StopwatchView({
         model: stopwatch
       });
       this.collection.add(stopwatch);
-      this.collection.add(new window.Stopwatch({
+      return this.collection.add(new window.Stopwatch({
         name: 'delay' + this.counter,
-        view: this.delayView
+        view: this.delayView,
+        collection: this.collection
       }));
-      return console.log(this.collection);
     }
   });
   jQuery(function() {

@@ -25,7 +25,8 @@
       if (this.model) {
         this.model.view = this;
       }
-      return this.template = _.template($(this.template).html());
+      this.template = _.template($(this.template).html());
+      return this.model.bind("change:startTime", this.render);
     };
     StopwatchView.prototype.render = function() {
       $(this.el).html(this.template(this.model.toJSON()));

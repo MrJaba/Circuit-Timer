@@ -10,6 +10,7 @@ class window.StopwatchView extends Backbone.View
   initialize: ->
     @model.view = @ if @model
     @template = _.template($(@template).html())
+    @model.bind("change:startTime", @render)
   
   render: =>
     $(@el).html(@template(@model.toJSON()))

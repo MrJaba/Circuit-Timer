@@ -13,7 +13,8 @@
     }
     __extends(StopwatchCollectionView, Backbone.View);
     StopwatchCollectionView.prototype.events = {
-      'click button#startCircuit': 'startCircuit'
+      'click button#startCircuit': 'startCircuit',
+      'click button#resetCircuit': 'resetCircuit'
     };
     StopwatchCollectionView.prototype.initialize = function() {
       this.collection.bind("add", __bind(function(stopwatch) {
@@ -24,10 +25,14 @@
     };
     StopwatchCollectionView.prototype.render = function() {
       $(this.el).append("<button id='startCircuit'>Start Circuit</button>");
+      $(this.el).append("<button id='resetCircuit'>Reset Circuit</button>");
       return this;
     };
     StopwatchCollectionView.prototype.startCircuit = function() {
       return this.collection.startCircuit($("#delay").val());
+    };
+    StopwatchCollectionView.prototype.resetCircuit = function() {
+      return this.collection.resetAll();
     };
     return StopwatchCollectionView;
   })();

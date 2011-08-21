@@ -19,14 +19,19 @@
       "change input.delay": "setDelay"
     };
     DelayView.prototype.initialize = function() {
-      return this.template = _.template($(this.template).html());
+      this.template = _.template($(this.template).html());
+      return this.collection.bind("resetAll", this.render);
     };
     DelayView.prototype.render = function() {
-      $(this.el).html(this.template({}));
+      var _ref;
+      $(this.el).html(this.template({
+        remaining: (_ref = this.delay) != null ? _ref : ""
+      }));
       return this;
     };
     DelayView.prototype.setDelay = function() {
-      return this.collection.setDelay(this.$("input.time").val());
+      this.delay = this.$("input.time").val();
+      return this.collection.setDelay(this.delay);
     };
     return DelayView;
   })();

@@ -17,11 +17,10 @@ MainView = Backbone.View.extend(
     
   createStopwatch: ->
     @counter++
-    stopwatch = new window.Stopwatch({name:@counter})
+    stopwatch = new window.Stopwatch({name:@counter, collection:@collection})
     view = new window.StopwatchView({model:stopwatch})
     @collection.add(stopwatch)
-    @collection.add(new window.Stopwatch({name:'delay'+@counter, view:@delayView}))
-    console.log(@collection)
+    @collection.add(new window.Stopwatch({name:'delay'+@counter, view:@delayView, collection:@collection}))
 )
 
 jQuery ->

@@ -9,6 +9,7 @@
   };
   window.Stopwatch = (function() {
     function Stopwatch() {
+      this.reset = __bind(this.reset, this);;
       this.tick = __bind(this.tick, this);;      Stopwatch.__super__.constructor.apply(this, arguments);
     }
     __extends(Stopwatch, Backbone.Model);
@@ -32,11 +33,17 @@
         });
       }
       if (this.attributes.view != null) {
-        return this.view = this.attributes.view;
+        this.view = this.attributes.view;
+      }
+      if (this.attributes.collection != null) {
+        this.collection = this.attributes.collection;
+      }
+      if (this.collection != null) {
+        return this.collection.bind('resetAll', this.reset);
       }
     };
     Stopwatch.prototype.time = function() {
-      return new Date().getTime() - this.startTime;
+      return new Date().getTime() - this.get("startTime");
     };
     Stopwatch.prototype.timeLeft = function() {
       return this.get("time") - this.get("elapsed");
@@ -49,7 +56,6 @@
         "remaining": this.timeLeft()
       });
       $(".time", this.view.el).val(this.get("remaining").toFixed(1));
-      console.log(this.get("remaining").toFixed(1));
       if (this.get("remaining") <= 0) {
         this.stop();
         return this.collection.startNext();
@@ -57,7 +63,9 @@
     };
     Stopwatch.prototype.start = function() {
       this.running = true;
-      this.startTime = new Date().getTime();
+      this.set({
+        "startTime": new Date().getTime()
+      });
       return this.timer = setInterval(this.tick, 100);
     };
     Stopwatch.prototype.stop = function() {
@@ -65,10 +73,11 @@
       return window.clearInterval(this.timer);
     };
     Stopwatch.prototype.reset = function() {
-      this.startTime = null;
+      this.stop();
       return this.set({
         "elapsed": 0,
-        "remaining": 0
+        "remaining": this.get("time"),
+        "startTime": null
       });
     };
     Stopwatch.prototype.startStop = function() {
@@ -79,7 +88,6 @@
       }
     };
     Stopwatch.prototype.isDelay = function() {
-      console.log(this.get("name"));
       return this.get("name").toString().match(/delay/);
     };
     return Stopwatch;

@@ -9,14 +9,20 @@ class window.StopwatchCollection extends Backbone.Collection
     @delayTime = delayTime
     @startNext()
     
+  resetAll: ->
+    @current = 0
+    @trigger("resetAll")
+    
   startNext: ->
-    @next().start() if @current < @size()
+    if @current < @size()
+      @next().start() 
+    else
+      @resetAll()
     
   next: ->
     @at(@current++)
     
   setDelay: (delay) ->
     @each (stopwatch) ->
-      console.log(stopwatch, stopwatch.isDelay())
       stopwatch.set({"time": delay}) if stopwatch.isDelay()
         
