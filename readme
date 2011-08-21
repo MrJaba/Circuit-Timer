@@ -1,0 +1,7 @@
+Circuit Timer!
+==============
+
+This is a very basic application to test out Backbone.js. It's written in Coffeescript, and yes it looks a bit rubbish, I'm no designer. 
+It uses HTML5 localstorage via backbone-localstorage.js to store the exercise timers you enter, and between each timer there is a delay so you can prepare for the next exercise.
+
+There are lots of bugs still, and I hope to fix them soon. 

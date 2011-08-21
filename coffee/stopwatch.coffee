@@ -8,8 +8,6 @@ class window.Stopwatch extends Backbone.Model
     @set("elapsed":0, "remaining": @get("time"))
     @set("running":false) unless @get("running")?
     @view = @attributes.view if @attributes.view?
-    @collection = @attributes.collection if @attributes.collection?
-    @collection.bind('resetAll', @reset) if @collection?
     
   time: ->
     new Date().getTime() - @get("startTime")

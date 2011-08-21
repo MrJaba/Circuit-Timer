@@ -12,7 +12,8 @@
       StopwatchCollection.__super__.constructor.apply(this, arguments);
     }
     __extends(StopwatchCollection, Backbone.Collection);
-    StopwatchCollection.prototype.model = Stopwatch;
+    StopwatchCollection.prototype.model = window.Stopwatch;
+    StopwatchCollection.prototype.localStorage = new Store("stopwatches");
     StopwatchCollection.prototype.initialize = function() {
       return this.current = 0;
     };
@@ -22,7 +23,10 @@
     };
     StopwatchCollection.prototype.resetAll = function() {
       this.current = 0;
-      return this.trigger("resetAll");
+      this.trigger("resetAll");
+      return this.each(function(stopwatch) {
+        return stopwatch.reset();
+      });
     };
     StopwatchCollection.prototype.startNext = function() {
       if (this.current < this.size()) {

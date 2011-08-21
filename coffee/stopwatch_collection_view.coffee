@@ -6,7 +6,6 @@ class window.StopwatchCollectionView extends Backbone.View
   
   initialize: ->
     @collection.bind("add", (stopwatch) => 
-      console.log(stopwatch)
       $(@el).append(stopwatch.view.render().el))
     @render()
   

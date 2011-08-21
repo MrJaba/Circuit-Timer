@@ -33,13 +33,7 @@
         });
       }
       if (this.attributes.view != null) {
-        this.view = this.attributes.view;
-      }
-      if (this.attributes.collection != null) {
-        this.collection = this.attributes.collection;
-      }
-      if (this.collection != null) {
-        return this.collection.bind('resetAll', this.reset);
+        return this.view = this.attributes.view;
       }
     };
     Stopwatch.prototype.time = function() {

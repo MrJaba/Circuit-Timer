@@ -1,2 +1,9 @@
--Need to add a reset for the collection
+BUGS:
+=====
+- Second delay isn't working correctly, it works for the first, but after that it defaults to 30s again
+
+TODO:
+=====
+-remember configuration - circuits, times etc
+ \- need to remember the delay between exercises on reload
 -Need to specify how many circuits

@@ -1,6 +1,6 @@
 class window.StopwatchCollection extends Backbone.Collection
-  model:Stopwatch
-  #localStorage: new Store("stopwatches")
+  model:window.Stopwatch
+  localStorage: new Store("stopwatches")
   
   initialize: ->
     @current = 0
@@ -12,6 +12,8 @@ class window.StopwatchCollection extends Backbone.Collection
   resetAll: ->
     @current = 0
     @trigger("resetAll")
+    @each (stopwatch) ->
+      stopwatch.reset()
     
   startNext: ->
     if @current < @size()

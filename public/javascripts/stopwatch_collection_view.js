@@ -18,7 +18,6 @@
     };
     StopwatchCollectionView.prototype.initialize = function() {
       this.collection.bind("add", __bind(function(stopwatch) {
-        console.log(stopwatch);
         return $(this.el).append(stopwatch.view.render().el);
       }, this));
       return this.render();
